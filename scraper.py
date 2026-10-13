@@ -15,6 +15,20 @@ def extract_next_links(url, resp):
     #         resp.raw_response.url: the url, again
     #         resp.raw_response.content: the content of the page!
     # Return a list with the hyperlinks (as strings) scrapped from resp.raw_response.content
+
+    links = []
+
+    if resp.status == 200: 
+        return links
+    
+    if resp.raw_response is None:
+        return links
+
+    content = resp.raw_response.content
+
+    if content is None: 
+        return links
+    
     return list()
 
 def is_valid(url):
