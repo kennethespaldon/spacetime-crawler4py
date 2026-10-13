@@ -54,6 +54,27 @@ def is_valid(url):
         parsed = urlparse(url)
         if parsed.scheme not in set(["http", "https"]):
             return False
+
+        hostname = parsed.hostname
+
+        if hostname is None: 
+            return False
+
+        allowed_domains = (
+            "ics.uci.edu",
+            "cs.uci.edu",
+            "informatics.uci.edu",
+            "stat.uci.edu"
+        )
+
+        valid_domain = False
+        for domain in allowed_domains: 
+            if hostname == domain or hostname.endswith("."+domain): 
+                valid_domain = True
+
+        if not valid_domain: 
+            return False
+        
         return not re.match(
             r".*\.(css|js|bmp|gif|jpe?g|ico"
             + r"|png|tiff?|mid|mp2|mp3|mp4"
