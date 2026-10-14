@@ -19,22 +19,28 @@ def extract_next_links(url, resp):
 
     links = []
 
-    if resp.status == 200: 
+    # if the status returns other than 200, then return links
+    if resp.status != 200: 
         return links
-    
+
+    # for the case of raw_response is none, then return links
     if resp.raw_response is None:
         return links
 
     content = resp.raw_response.content
 
+    # for the case of content being none, then return links
     if content is None: 
         return links
 
     try: 
+        # parse the content 
         soup = BeautifulSoup(content, "html.parser")
     except Exception: 
         return links
 
+    
+    # defragment the tags
     for tag in soup.findall("a", href = True):
         href = tag["href"]
 
@@ -67,6 +73,7 @@ def is_valid(url):
             "stat.uci.edu"
         )
 
+        # filtering out the valid domains
         valid_domain = False
         for domain in allowed_domains: 
             if hostname == domain or hostname.endswith("."+domain): 
