@@ -41,7 +41,7 @@ def extract_next_links(url, resp):
 
     
     # defragment the tags
-    for tag in soup.findall("a", href = True):
+    for tag in soup.find_all("a", href = True):
         href = tag["href"]
 
         abs_url = urljoin(resp.url, href)
