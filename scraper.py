@@ -18,6 +18,7 @@ def extract_next_links(url, resp):
     # Return a list with the hyperlinks (as strings) scrapped from resp.raw_response.content
 
     links = []
+    visited = set()
 
     # if the status returns other than 200, then return links
     if resp.status != 200: 
@@ -48,7 +49,10 @@ def extract_next_links(url, resp):
 
         abs_url, frag = urldefrag(abs_url)
 
-        links.append(abs_url)
+        # ensure links are not visited more than once using a set called "visited"
+        if abs_url not in visited:
+            visited.add(abs_url)
+            links.append(abs_url)
     
     return links
 
