@@ -1,6 +1,7 @@
 import re
 from urllib.parse import urlparse, urljoin, urldefrag
 from bs4 import BeautifulSoup
+import sqlite3
 
 MAX_CONTENT_BYTES = 5 * 1024 * 1024   # skip responses larger than ~5 MB
 MIN_WORDS = 50                        # pages with fewer words are treated as low information
@@ -14,6 +15,32 @@ TRAP_PATTERN = re.compile(
     r"|[?&;]do=(diff|revisions|edit|media|index|backlink|export)"
     r"|[?&;]action=(login|edit|download|diff|history)"
 )
+
+
+# Save the statistics into database
+def save_stats(url, word_count):
+    url = urldefrag(url)[0]
+
+    connection = sqlite3.connect("crawl_stat.db")
+    cursor = connection.cursor()
+
+    # create a table if not exists
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS pages (
+            url TEXT PRIMARY KEY, 
+            word_count INTEGER
+        )
+    """)
+
+    # insert values
+    cursor.execute("""
+        INSERT OR IGNORE INTO pages (url, word_count) 
+        VALUES (?,?)
+    """, (url, word_count))
+
+    connection.commit()
+    connection.close()
+
 
 def scraper(url, resp):
     links = extract_next_links(url, resp)
@@ -74,9 +101,12 @@ def extract_next_links(url, resp):
     for tag in soup(["script", "style"]):
         tag.decompose()
 
+    # Remove the minimum word limit temporarily since a page fewer than 50 words could contain links
     words = re.findall(r"[a-zA-Z0-9]+", soup.get_text(" "))
-    if len(words) < MIN_WORDS:
-        return links
+    word_count = len(words)
+
+    if is_valid(resp.url): 
+        save_stats(resp.url, word_count) 
 
     # defragment the tags
     for tag in soup.find_all("a", href = True):
