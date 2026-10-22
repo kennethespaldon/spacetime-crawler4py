@@ -109,5 +109,4 @@ venv.bak/
 *.full.py
 *.shelve
 
-#Gerome Add
 page_stats.shelve*

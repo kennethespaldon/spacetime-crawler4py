@@ -1,5 +1,5 @@
 import re
-import shelve #Gerome Add
+import shelve
 from urllib.parse import urlparse, urljoin, urldefrag, quote
 from bs4 import BeautifulSoup
 
@@ -49,7 +49,7 @@ def save_stats(url, words):
         "word_count" : len(words),
         "freq": count_freq(words)
     }
-    page_stat.sync() #Gerome Add
+    page_stat.sync()
 
 # Clear all saved statistics when starting a completely new crawl
 def reset_stats():
@@ -130,13 +130,11 @@ def get_subdomains():
     return sorted(subdomains.items())
 
 # Get the number of unique pages crawled
-#Gerome Add
 def get_unique_page_count():
     return len(page_stat)
 
 
 # Find the page with the largest word count
-#Gerome Add
 def get_longest_page():
     longest_url = None
     longest_word_count = 0
@@ -149,7 +147,6 @@ def get_longest_page():
     return longest_url, longest_word_count
 
 # Create the report required for Assignment 2
-#Gerome Add
 def create_report(filename="report.txt"):
     unique_pages = get_unique_page_count()
     longest_url, longest_word_count = get_longest_page()
