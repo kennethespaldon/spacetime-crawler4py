@@ -61,7 +61,7 @@ def reset_stats():
 def close_stats():
     page_stat.sync()
     page_stat.close()
-    
+
 
 # count word frequencies
 def count_freq(words): 
@@ -128,6 +128,57 @@ def get_subdomains():
                 subdomains[hostname] = 1
 
     return sorted(subdomains.items())
+
+# Get the number of unique pages crawled
+#Gerome Add
+def get_unique_page_count():
+    return len(page_stat)
+
+
+# Find the page with the largest word count
+#Gerome Add
+def get_longest_page():
+    longest_url = None
+    longest_word_count = 0
+
+    for url, stats in page_stat.items():
+        if stats["word_count"] > longest_word_count:
+            longest_url = url
+            longest_word_count = stats["word_count"]
+
+    return longest_url, longest_word_count
+
+# Create the report required for Assignment 2
+#Gerome Add
+def create_report(filename="report.txt"):
+    unique_pages = get_unique_page_count()
+    longest_url, longest_word_count = get_longest_page()
+    top_words = get_top_50()
+    subdomains = get_subdomains()
+
+    with open(filename, "w", encoding="utf-8") as report:
+        report.write("CS 121 - Assignment 2: Web Crawler Report\n\n")
+
+        # 1. Number of unique pages
+        report.write("1. Unique Pages\n")
+        report.write(f"{unique_pages}\n\n")
+
+        # 2. Longest page
+        report.write("2. Longest Page\n")
+        report.write(f"URL: {longest_url}\n")
+        report.write(f"Word Count: {longest_word_count}\n\n")
+
+        # 3. Top 50 words
+        report.write("3. 50 Most Common Words\n")
+        for word, frequency in top_words:
+            report.write(f"{word}, {frequency}\n")
+
+        report.write("\n")
+
+        # 4. ICS subdomains
+        report.write("4. ICS Subdomains\n")
+        for subdomain, page_count in subdomains:
+            report.write(f"http://{subdomain}, {page_count}\n")
 
 def scraper(url, resp):
     links = extract_next_links(url, resp)

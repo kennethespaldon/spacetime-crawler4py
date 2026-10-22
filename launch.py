@@ -21,6 +21,7 @@ def main(config_file, restart):
 
     try:
         crawler.start()
+        scraper.create_report()
     finally:
         scraper.close_stats()
 
