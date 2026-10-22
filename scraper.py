@@ -100,6 +100,19 @@ def get_top_50():
 
     return reversed
 
+def get_subdomains(): 
+    subdomains = {}
+
+    for url in page_stat: 
+        hostname = urlparse(url).hostname
+
+        if hostname and hostname.endswith(".ics.uci.edu"):
+            if hostname in subdomains: 
+                subdomains[hostname] += 1
+            else: 
+                subdomains[hostname] = 1
+
+    return sorted(subdomains.items())
 
 def scraper(url, resp):
     links = extract_next_links(url, resp)
