@@ -63,6 +63,43 @@ def count_freq(words):
 
     return freqs
 
+# load stop words from stopwords file
+def load_stopwords(): 
+    stopwords = set()
+
+    with open("stopwords.txt", "r", encoding = "utf-8") as file: 
+        for line in file: 
+            word = line.strip().lower()
+            if word: 
+                stopwords.add(word)
+
+    return stopwords
+
+
+# get top 50 words
+def get_top_50():
+    stopwords = load_stopwords()
+    total_freq = {}
+
+    for stats in page_stat.values():
+        for word, count in stats["freq"].items():
+
+            if word in stopwords:
+                continue
+
+            if word in total_freq:
+                total_freq[word] += count
+            else:
+                total_freq[word] = count
+
+    reversed = sorted(
+        total_freq.items(),
+        key=lambda item: item[1],
+        reverse=True
+    )[:50]
+
+    return reversed
+
 
 def scraper(url, resp):
     links = extract_next_links(url, resp)
@@ -127,7 +164,7 @@ def extract_next_links(url, resp):
     for tag in soup(["script", "style"]):
         tag.decompose()
 
-    words = re.findall(r"[a-zA-Z0-9]+", soup.get_text(" "))
+    words = re.findall(r"[a-zA-Z0-9]+(?:'[a-zA-Z0-9]+)*", soup.get_text(" ").lower())
 
     if is_valid(resp.url): 
         save_stats(resp.url, words) 
