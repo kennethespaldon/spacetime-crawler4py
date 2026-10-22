@@ -100,6 +100,7 @@ def get_top_50():
 
     return reversed
 
+# get subdomains
 def get_subdomains(): 
     subdomains = {}
 
