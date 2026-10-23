@@ -114,7 +114,7 @@ def get_top_50():
 
     return reversed
 
-# get subdomains
+# Get subdomains
 def get_subdomains(): 
     subdomains = {}
 
@@ -146,7 +146,7 @@ def get_longest_page():
 
     return longest_url, longest_word_count
 
-# Create the report required for Assignment 2
+# Create the report required
 def create_report(filename="report.txt"):
     unique_pages = get_unique_page_count()
     longest_url, longest_word_count = get_longest_page()
@@ -156,23 +156,23 @@ def create_report(filename="report.txt"):
     with open(filename, "w", encoding="utf-8") as report:
         report.write("CS 121 - Assignment 2: Web Crawler Report\n\n")
 
-        # 1. Number of unique pages
+        # Number of unique pages
         report.write("1. Unique Pages\n")
         report.write(f"{unique_pages}\n\n")
 
-        # 2. Longest page
+        # Longest page
         report.write("2. Longest Page\n")
         report.write(f"URL: {longest_url}\n")
         report.write(f"Word Count: {longest_word_count}\n\n")
 
-        # 3. Top 50 words
+        # Top 50 words
         report.write("3. 50 Most Common Words\n")
         for word, frequency in top_words:
             report.write(f"{word}, {frequency}\n")
 
         report.write("\n")
 
-        # 4. ICS subdomains
+        # ICS subdomains
         report.write("4. ICS Subdomains\n")
         for subdomain, page_count in subdomains:
             report.write(f"http://{subdomain}, {page_count}\n")
