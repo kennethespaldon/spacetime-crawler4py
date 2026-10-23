@@ -1,0 +1,103 @@
+CS 121 - Assignment 2: Web Crawler Report
+
+1. Unique Pages
+2748
+
+2. Longest Page
+URL: https://duttgroup.ics.uci.edu/publications/?limit=1&tgid=&yr=&type=&usr=&auth=&tsr=
+Word Count: 18330
+
+3. 50 Most Common Words
+research, 6508
+university, 6165
+uci, 6015
+data, 5918
+ics, 5047
+computer, 4992
+learning, 4885
+science, 4844
+systems, 4676
+10, 4519
+1, 4468
+information, 4018
+software, 3993
+dechter, 3966
+will, 3796
+irvine, 3600
+2, 3513
+us, 3500
+s, 3206
+can, 3193
+search, 3130
+pdf, 2972
+d, 2941
+models, 2902
+3, 2762
+project, 2739
+rina, 2665
+doi, 2664
+students, 2577
+time, 2556
+news, 2508
+machine, 2504
+based, 2499
+school, 2377
+algorithms, 2365
+2025, 2322
+new, 2290
+conference, 2278
+dutt, 2270
+close, 2254
+edu, 2249
+paper, 2248
+ieee, 2247
+computing, 2213
+4, 2207
+home, 2158
+student, 2152
+health, 2146
+pm, 2135
+00, 2135
+
+4. ICS Subdomains
+http://acoi.ics.uci.edu, 73
+http://asterix.ics.uci.edu, 7
+http://cert.ics.uci.edu, 17
+http://checkin.ics.uci.edu, 2
+http://chenli.ics.uci.edu, 5
+http://cml.ics.uci.edu, 130
+http://create.ics.uci.edu, 7
+http://cs.ics.uci.edu, 10
+http://ds4all.ics.uci.edu, 3
+http://duttgroup.ics.uci.edu, 134
+http://evoke.ics.uci.edu, 4
+http://fellowships.ics.uci.edu, 3
+http://futurehealth.ics.uci.edu, 177
+http://grape.ics.uci.edu, 99
+http://graphics.ics.uci.edu, 1
+http://hack.ics.uci.edu, 1
+http://hpi.ics.uci.edu, 1
+http://i-sensorium.ics.uci.edu, 5
+http://icde2023.ics.uci.edu, 40
+http://informatics.ics.uci.edu, 7
+http://isg.ics.uci.edu, 207
+http://jgarcia.ics.uci.edu, 34
+http://mailman.ics.uci.edu, 36
+http://mcs.ics.uci.edu, 4
+http://mdogucu.ics.uci.edu, 1
+http://mswe.ics.uci.edu, 10
+http://nalini.ics.uci.edu, 5
+http://ngs.ics.uci.edu, 2
+http://oai.ics.uci.edu, 6
+http://radicle.ics.uci.edu, 2
+http://riscit.ics.uci.edu, 3
+http://scale.ics.uci.edu, 7
+http://seal.ics.uci.edu, 4
+http://stairs.ics.uci.edu, 3
+http://stat.ics.uci.edu, 8
+http://summeracademy.ics.uci.edu, 13
+http://tad.ics.uci.edu, 3
+http://unite.ics.uci.edu, 10
+http://vision.ics.uci.edu, 20
+http://www-db.ics.uci.edu, 25
+http://www.ics.uci.edu, 846
