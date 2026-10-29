@@ -98,6 +98,9 @@ def get_top_50():
     for stats in page_stat.values():
         for word, count in stats["freq"].items():
 
+            if len(word) < 2 and word.isalpha(): 
+                continue
+
             if word in stopwords:
                 continue
 
@@ -260,17 +263,19 @@ def extract_next_links(url, resp):
             visited.add(abs_url)
             links.append(abs_url)
 
-    # Detect repeated low-information pages
+    # Detect repeated low-information pages to stop exploring outgoing links
     if len(words) < MIN_WORDS:
 
         signature = (
-            tuple(word.lower() for word in words),
-            tuple(sorted(link for link in links if is_valid(link)))
+            tuple(word.lower() for word in words), # words extracted from the page
+            tuple(sorted(link for link in links if is_valid(link))) # valid links from the webpage
         )
 
+        # if we already have the similar signature, then we wont' store in the visited_Low_info
         if signature in visited_low_info:
             return []
 
+        # else we store
         visited_low_info.add(signature)
 
     
